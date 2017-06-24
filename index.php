@@ -139,20 +139,17 @@
     <script>
         window.fbAsyncInit = function () {
             FB.init({
-                appId: '1667228050231771',
+                appId: '***',
                 cookie: true,
                 xfbml: true,
-                version: 'v2.5'
+                version: 'v2.9'
             });
         };
 
-        (function (d, s, id) {
+        (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {
-                return;
-            }
-            js = d.createElement(s);
-            js.id = id;
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
@@ -313,13 +310,12 @@
                                 //console.log(response.images[0].source);
 
                                 // Create facebook post using image
-                                FB.api(
-                                    "/me/feed",
-                                    "POST",
+                                FB.api( "/me/feed", "POST",
                                     {
                                         "message": "",
-                                        "picture": response.images[0].source,
-                                        "link": "http://bit.ly/1QK0Qbsz",
+                                        "picture": response.images[0].source, // 90-Day Deprecation - https://developers.facebook.com/docs/apps/changelog
+                                        // "object_attachment": response.images[0].source, // 90-Day Deprecation - https://developers.facebook.com/docs/apps/changelog
+                                        "link": window.location.href,
                                         "name": 'Look at the cute panda!',
                                         "description": message,
                                         "privacy": {
@@ -329,7 +325,11 @@
                                     function (response) {
                                         if (response && !response.error) {
                                             /* handle the result */
+                                            alert("Posted story to facebook successfully");
                                             console.log("Posted story to facebook");
+                                            console.log(response);
+                                        } else {
+                                            console.log("Failed to post story");
                                             console.log(response);
                                         }
                                     }
