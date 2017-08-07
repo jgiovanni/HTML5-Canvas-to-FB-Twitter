@@ -188,6 +188,8 @@
 <!-- /.container -->
 <script type="text/javascript">
     (function () {
+        // Blob used for Facebook
+        var blob;
         // Canvas
         var canvas = document.getElementById('canvas');
         var ctx = canvas.getContext('2d');
